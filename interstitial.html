@@ -1,0 +1,730 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>ADMENSION - Please Wait</title>
+  <!-- Google AdSense -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5584590642779290"
+       crossorigin="anonymous"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --bg-dark: #0a0a0f;
+      --bg-card: rgba(255,255,255,0.03);
+      --border: rgba(255,255,255,0.1);
+      --accent: #6366f1;
+      --accent2: #22d3ee;
+      --success: #22c55e;
+      --warning: #f59e0b;
+      --danger: #ef4444;
+      --text: #fff;
+      --text-muted: rgba(255,255,255,0.6);
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html, body { 
+      min-height: 100vh;
+      font-family: 'Inter', -apple-system, sans-serif;
+      background: var(--bg-dark);
+      color: var(--text);
+    }
+    
+    /* === LAYOUT === */
+    .page-wrapper {
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+    
+    /* === TOP AD BAR === */
+    .top-ad-bar {
+      background: linear-gradient(180deg, rgba(20,20,30,0.98) 0%, rgba(10,10,15,0.95) 100%);
+      border-bottom: 1px solid var(--border);
+      padding: 8px 16px;
+      text-align: center;
+    }
+    .top-ad-bar .ad-wrapper {
+      max-width: 728px;
+      min-height: 90px;
+      margin: 0 auto;
+      background: rgba(255,255,255,0.02);
+      border: 1px dashed rgba(255,255,255,0.1);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .ad-label {
+      font-size: 10px;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+    
+    /* === MAIN CONTENT === */
+    .main-content {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px 16px;
+      background: 
+        radial-gradient(ellipse at 20% 0%, rgba(99,102,241,0.15) 0%, transparent 50%),
+        radial-gradient(ellipse at 80% 100%, rgba(34,211,238,0.1) 0%, transparent 50%),
+        var(--bg-dark);
+    }
+    
+    /* === STEP CARD === */
+    .step-card {
+      background: var(--bg-card);
+      backdrop-filter: blur(20px);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 32px;
+      max-width: 480px;
+      width: 100%;
+      text-align: center;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.4);
+    }
+    
+    .step-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(99,102,241,0.15);
+      border: 1px solid rgba(99,102,241,0.3);
+      padding: 6px 14px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--accent);
+      margin-bottom: 20px;
+    }
+    
+    .link-name {
+      font-size: 28px;
+      font-weight: 800;
+      margin-bottom: 8px;
+      background: linear-gradient(135deg, #fff 0%, rgba(255,255,255,0.8) 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+    }
+    
+    .link-dest {
+      font-size: 13px;
+      color: var(--text-muted);
+      margin-bottom: 24px;
+      word-break: break-all;
+    }
+    
+    /* === PROGRESS BAR === */
+    .progress-wrapper {
+      margin-bottom: 24px;
+    }
+    .progress-steps {
+      display: flex;
+      justify-content: center;
+      gap: 8px;
+      margin-bottom: 12px;
+    }
+    .progress-step {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 14px;
+      background: rgba(255,255,255,0.05);
+      border: 2px solid rgba(255,255,255,0.1);
+      color: var(--text-muted);
+      transition: all 0.3s ease;
+    }
+    .progress-step.active {
+      background: var(--accent);
+      border-color: var(--accent);
+      color: #fff;
+      box-shadow: 0 0 20px rgba(99,102,241,0.5);
+    }
+    .progress-step.done {
+      background: var(--success);
+      border-color: var(--success);
+      color: #fff;
+    }
+    .progress-bar {
+      height: 4px;
+      background: rgba(255,255,255,0.1);
+      border-radius: 2px;
+      overflow: hidden;
+    }
+    .progress-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--accent), var(--accent2));
+      transition: width 0.3s ease;
+    }
+    
+    /* === TIMER === */
+    .timer-wrapper {
+      margin: 24px 0;
+    }
+    .timer-display {
+      font-size: 72px;
+      font-weight: 800;
+      background: linear-gradient(135deg, var(--warning) 0%, var(--danger) 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      line-height: 1;
+    }
+    .timer-label {
+      font-size: 13px;
+      color: var(--text-muted);
+      margin-top: 8px;
+    }
+    
+    /* === BUTTON === */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 16px 32px;
+      font-size: 16px;
+      font-weight: 700;
+      border: none;
+      border-radius: 12px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      font-family: inherit;
+      width: 100%;
+      max-width: 280px;
+    }
+    .btn-primary {
+      background: linear-gradient(135deg, var(--accent) 0%, #4f46e5 100%);
+      color: #fff;
+      box-shadow: 0 4px 20px rgba(99,102,241,0.4);
+    }
+    .btn-primary:hover:not(:disabled) {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 30px rgba(99,102,241,0.5);
+    }
+    .btn-success {
+      background: linear-gradient(135deg, var(--success) 0%, #16a34a 100%);
+      color: #fff;
+    }
+    .btn:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+      transform: none !important;
+    }
+    
+    /* === MESSAGE BOX === */
+    .message-box {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 16px;
+      margin: 16px 0;
+      text-align: left;
+      font-size: 14px;
+      line-height: 1.6;
+    }
+    .message-box.warning {
+      background: rgba(239,68,68,0.1);
+      border-color: rgba(239,68,68,0.3);
+    }
+    
+    /* === QUOTE CARD === */
+    .quote-card {
+      background: linear-gradient(135deg, rgba(255,215,0,0.1) 0%, rgba(255,215,0,0.05) 100%);
+      border: 1px solid rgba(255,215,0,0.2);
+      border-radius: 16px;
+      padding: 48px 24px 24px 24px; /* Extra top padding for badge */
+      margin-bottom: 20px;
+      position: relative;
+      overflow: hidden;
+    }
+    .quote-day {
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      background: rgba(255,215,0,0.9);
+      color: #000;
+      padding: 4px 10px;
+      border-radius: 6px;
+      font-size: 11px;
+      font-weight: 700;
+      z-index: 10;
+    }
+    .quote-bg {
+      position: absolute;
+      inset: 0;
+      background-size: cover;
+      background-position: center;
+      opacity: 0.25;
+      z-index: 0;
+    }
+    .quote-content {
+      position: relative;
+      z-index: 1;
+    }
+    .quote-text {
+      font-size: 16px;
+      font-weight: 600;
+      line-height: 1.6;
+      color: #fff;
+    }
+    .quote-source {
+      font-size: 12px;
+      color: rgba(255,215,0,0.7);
+      margin-top: 12px;
+    }
+    
+    /* === TOS RADIO === */
+    .tos-options {
+      text-align: left;
+      margin: 16px 0;
+    }
+    .tos-option {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 12px 16px;
+      background: rgba(255,255,255,0.03);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      margin-bottom: 8px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .tos-option:hover {
+      background: rgba(255,255,255,0.05);
+    }
+    .tos-option input {
+      width: 18px;
+      height: 18px;
+    }
+    
+    /* === BOTTOM AD BAR === */
+    .bottom-ad-bar {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: linear-gradient(0deg, rgba(10,10,15,0.98) 0%, rgba(20,20,30,0.95) 100%);
+      border-top: 1px solid var(--border);
+      padding: 12px 16px;
+      z-index: 1000;
+    }
+    .bottom-ad-wrapper {
+      max-width: 728px;
+      margin: 0 auto;
+      min-height: 90px;
+      background: rgba(255,255,255,0.02);
+      border: 1px dashed rgba(255,255,255,0.1);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    
+    /* === SIDE ADS (Desktop) === */
+    .side-ad {
+      position: fixed;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 160px;
+      min-height: 600px;
+      background: rgba(255,255,255,0.02);
+      border: 1px dashed rgba(255,255,255,0.1);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 999;
+    }
+    .side-ad.left { left: 16px; }
+    .side-ad.right { right: 16px; }
+    @media (max-width: 1200px) {
+      .side-ad { display: none !important; }
+    }
+    
+    /* === FOOTER === */
+    .page-footer {
+      text-align: center;
+      padding: 16px;
+      font-size: 12px;
+      color: var(--text-muted);
+      padding-bottom: 130px; /* Space for bottom ad */
+    }
+    .page-footer a {
+      color: var(--accent2);
+      text-decoration: none;
+    }
+    
+    /* === HIDDEN === */
+    .hidden { display: none !important; }
+    
+    /* === RESPONSIVE === */
+    @media (max-width: 600px) {
+      .step-card { padding: 24px 20px; }
+      .timer-display { font-size: 56px; }
+      .link-name { font-size: 22px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="page-wrapper">
+    
+    <!-- TOP AD BAR -->
+    <div class="top-ad-bar">
+      <div class="ad-wrapper ad-container" id="ad-interstitial-sticky">
+        <!-- AdSense auto-loaded by ad-loader.js -->
+      </div>
+    </div>
+    
+    <!-- MAIN CONTENT -->
+    <div class="main-content">
+      
+      <!-- STEP 1 -->
+      <div id="step1" class="step-card hidden">
+        <div class="step-badge">📍 Step 1 of 3</div>
+        <div id="tos_error" class="message-box warning hidden" style="margin-bottom:16px">
+          <strong>❌ You must agree to Terms of Service</strong><br>
+          Please complete the steps and agree to continue.
+        </div>
+        <div class="link-name" id="linkName1">Loading...</div>
+        <div class="link-dest" id="linkDest1"></div>
+        
+        <div class="progress-wrapper">
+          <div class="progress-steps">
+            <div class="progress-step active">1</div>
+            <div class="progress-step">2</div>
+            <div class="progress-step">3</div>
+          </div>
+          <div class="progress-bar"><div class="progress-fill" style="width:0%"></div></div>
+        </div>
+        
+        <div class="timer-wrapper">
+          <div class="timer-display" id="timer1">3</div>
+          <div class="timer-label">seconds remaining</div>
+        </div>
+        
+        <button class="btn btn-primary" id="btn1">▶ Start Timer</button>
+      </div>
+      
+      <!-- STEP 2 -->
+      <div id="step2" class="step-card hidden">
+        <div class="step-badge">📍 Step 2 of 3</div>
+        
+        <div class="quote-card" id="quoteCard">
+          <div class="quote-bg" id="quoteBg"></div>
+          <div class="quote-day" id="quoteDay">DAY 1/365</div>
+          <div class="quote-content">
+            <div class="quote-text" id="quoteText">"Loading daily motivation..."</div>
+            <div class="quote-source">— ADMENSION DAILY</div>
+          </div>
+        </div>
+        
+        <div class="progress-wrapper">
+          <div class="progress-steps">
+            <div class="progress-step done">✓</div>
+            <div class="progress-step active">2</div>
+            <div class="progress-step">3</div>
+          </div>
+          <div class="progress-bar"><div class="progress-fill" style="width:33%"></div></div>
+        </div>
+        
+        <div class="timer-wrapper">
+          <div class="timer-display" id="timer2">3</div>
+          <div class="timer-label" id="timer2Label">seconds remaining</div>
+        </div>
+        
+        <button class="btn btn-primary" id="btn2">⏳ Please Wait...</button>
+      </div>
+      
+      <!-- STEP 3 -->
+      <div id="step3" class="step-card hidden">
+        <div class="step-badge">📍 Step 3 of 3 — Final Step</div>
+        <div class="link-name" id="linkName3">Loading...</div>
+        
+        <div class="message-box" id="customMessage">
+          Click continue to reach your destination.
+        </div>
+        
+        <div class="message-box warning">
+          <strong>⚠️ Terms of Service</strong><br>
+          We do not condone malicious links. This service is provided as-is. Use at your own discretion.
+        </div>
+        
+        <div class="tos-options">
+          <label class="tos-option">
+            <input type="radio" name="tos" value="disagree" checked>
+            <span>❌ I disagree (return to start)</span>
+          </label>
+          <label class="tos-option">
+            <input type="radio" name="tos" value="agree">
+            <span>✅ I agree to the Terms of Service</span>
+          </label>
+        </div>
+        
+        <div class="progress-wrapper">
+          <div class="progress-steps">
+            <div class="progress-step done">✓</div>
+            <div class="progress-step done">✓</div>
+            <div class="progress-step active">3</div>
+          </div>
+          <div class="progress-bar"><div class="progress-fill" style="width:66%"></div></div>
+        </div>
+        
+        <div class="timer-wrapper">
+          <div class="timer-display" id="timer3">10</div>
+          <div class="timer-label">seconds remaining</div>
+        </div>
+        
+        <button class="btn btn-primary" id="btn3">▶ Start Final Timer</button>
+      </div>
+      
+    </div>
+    
+    <!-- FOOTER -->
+    <div class="page-footer">
+      Powered by <a href="./">ADMENSION</a> — Link Shortener That Pays
+    </div>
+    
+  </div>
+  
+  <!-- SIDE ADS (Desktop Only) -->
+  <div class="side-ad left ad-container" id="ad-interstitial-left">
+    <!-- AdSense auto-loaded by ad-loader.js -->
+  </div>
+  <div class="side-ad right ad-container" id="ad-interstitial-right">
+    <!-- AdSense auto-loaded by ad-loader.js -->
+  </div>
+  
+  <!-- BOTTOM AD BAR -->
+  <div class="bottom-ad-bar">
+    <div class="bottom-ad-wrapper ad-container" id="ad-interstitial-bottom">
+      <!-- AdSense auto-loaded by ad-loader.js -->
+    </div>
+  </div>
+
+<script>
+  window.ADMENSION_API_URL = 'https://admension-api.admension.workers.dev';
+  // Event collector — deploy cloud/apps_script_collector.gs.txt, paste Web App URL here:
+  window.ADMENSION_COLLECTOR_URL = 'https://admension-api.admension.workers.dev/api/events';
+</script>
+<script src="./src/consent.js"></script>
+<script src="./src/api-client.js"></script>
+<script src="./src/daily-quotes.js"></script>
+<script src="./src/ad-loader.js"></script>
+<script src="./src/event-collector.js"></script>
+
+<script>
+/* ===== ADMENSION INTERSTITIAL ===== */
+
+// Ads are auto-initialized by ad-loader.js which scans for AD_SLOTS
+// Container IDs match: ad-interstitial-sticky, ad-interstitial-left, ad-interstitial-right
+console.log('[ADMENSION] Interstitial page - ads will be loaded by ad-loader.js');
+
+// Parse URL params
+const params = new URLSearchParams(location.search);
+const code = params.get('code') || '';
+const istep = parseInt(params.get('istep') || '1', 10);
+
+let linkData = null;
+
+// Load link data
+(async function() {
+  if (!code) {
+    alert('No link code provided.');
+    location.href = './';
+    return;
+  }
+  
+  try {
+    const response = await window.ADMENSION_API.getLink(code);
+    
+    // API client returns data directly (already extracted from response.data)
+    if (response && (response.linkName || response.destUrl)) {
+      linkData = response;
+    } else {
+      throw new Error('Invalid link data');
+    }
+    
+    console.log('[ADMENSION] Loaded link:', linkData);
+    
+    // Track pageview (don't await, fire and forget)
+    window.ADMENSION_API.trackPageview(code).catch(e => console.warn('Pageview track failed:', e));
+    
+    initPage();
+  } catch(e) {
+    console.error('Failed to load link:', e);
+    // Show user-friendly error
+    document.body.innerHTML = `
+      <div style="display:flex;align-items:center;justify-content:center;min-height:100vh;flex-direction:column;font-family:system-ui;color:#fff;text-align:center;padding:20px">
+        <h1 style="font-size:48px;margin-bottom:16px">😕</h1>
+        <h2 style="margin-bottom:8px">Link Not Found</h2>
+        <p style="opacity:0.7;margin-bottom:24px">This link may have expired or doesn't exist.</p>
+        <a href="./" style="padding:12px 24px;background:#6366f1;color:#fff;text-decoration:none;border-radius:8px">← Back to ADMENSION</a>
+      </div>
+    `;
+  }
+})();
+
+function initPage() {
+  if (!linkData) {
+    console.error('[ADMENSION] No link data available');
+    return;
+  }
+  
+  console.log('[ADMENSION] Initializing page with data:', linkData);
+  
+  // Populate link info
+  const name = linkData.linkName || 'Unknown Link';
+  const dest = linkData.destUrl || '';
+  const msg = linkData.message || 'Click continue to reach your destination.';
+  
+  // Update page title
+  document.title = name + ' - ADMENSION';
+  
+  document.querySelectorAll('[id^="linkName"]').forEach(el => el.textContent = name);
+  document.querySelectorAll('[id^="linkDest"]').forEach(el => {
+    try {
+      el.textContent = '→ ' + new URL(dest).hostname;
+    } catch(e) {
+      el.textContent = '→ ' + dest.slice(0, 40);
+    }
+  });
+  document.getElementById('customMessage').textContent = msg;
+  
+  // Check for ToS error
+  if (params.get('tos_msg') === '1') {
+    const err = document.getElementById('tos_error');
+    if (err) err.classList.remove('hidden');
+  }
+  
+  // Show appropriate step
+  if (istep === 1) showStep1();
+  else if (istep === 2) showStep2();
+  else if (istep === 3) showStep3();
+}
+
+function showStep1() {
+  document.getElementById('step1').classList.remove('hidden');
+  const timer = document.getElementById('timer1');
+  const btn = document.getElementById('btn1');
+  let countdown = 3;
+  
+  btn.onclick = () => {
+    btn.disabled = true;
+    btn.textContent = '⏳ Please Wait...';
+    
+    const interval = setInterval(() => {
+      countdown--;
+      timer.textContent = countdown;
+      
+      if (countdown <= 0) {
+        clearInterval(interval);
+        btn.disabled = false;
+        btn.className = 'btn btn-success';
+        btn.textContent = '✅ Continue to Step 2';
+        btn.onclick = () => {
+          const url = new URL(location.href);
+          url.searchParams.set('istep', '2');
+          location.href = url.toString();
+        };
+      }
+    }, 1000);
+  };
+}
+
+function showStep2() {
+  document.getElementById('step2').classList.remove('hidden');
+  
+  // Load daily quote + GIF
+  if (window.ADMENSION_DAILY_QUOTES) {
+    const quote = window.ADMENSION_DAILY_QUOTES.getTodaysQuote();
+    const day = window.ADMENSION_DAILY_QUOTES.getDayOfYear();
+    const gif = window.ADMENSION_DAILY_QUOTES.getTodaysGif();
+    
+    document.getElementById('quoteText').textContent = '"' + quote + '"';
+    document.getElementById('quoteDay').textContent = 'DAY ' + day + '/365';
+    
+    // Set GIF background
+    const bgEl = document.getElementById('quoteBg');
+    if (bgEl && gif) {
+      bgEl.style.backgroundImage = 'url(' + gif + ')';
+    }
+  }
+  
+  const timer = document.getElementById('timer2');
+  const label = document.getElementById('timer2Label');
+  const btn = document.getElementById('btn2');
+  let countdown = 3;
+  
+  // Auto-start unlock timer
+  const interval = setInterval(() => {
+    countdown--;
+    timer.textContent = countdown;
+    
+    if (countdown <= 0) {
+      clearInterval(interval);
+      btn.disabled = false;
+      btn.className = 'btn btn-success';
+      btn.textContent = '✅ Continue to Step 3';
+      label.textContent = 'ready to continue';
+      btn.onclick = () => {
+        const url = new URL(location.href);
+        url.searchParams.set('istep', '3');
+        location.href = url.toString();
+      };
+    }
+  }, 1000);
+}
+
+function showStep3() {
+  document.getElementById('step3').classList.remove('hidden');
+  const timer = document.getElementById('timer3');
+  const btn = document.getElementById('btn3');
+  let countdown = 10;
+  
+  btn.onclick = () => {
+    btn.disabled = true;
+    btn.textContent = '⏳ Please Wait...';
+    
+    const interval = setInterval(() => {
+      countdown--;
+      timer.textContent = countdown;
+      
+      if (countdown <= 0) {
+        clearInterval(interval);
+        btn.disabled = false;
+        btn.className = 'btn btn-success';
+        btn.textContent = '✅ Continue to Destination';
+        
+        btn.onclick = () => {
+          const agreed = document.querySelector('input[name="tos"]:checked')?.value === 'agree';
+          
+          if (agreed && linkData.destUrl) {
+            location.href = linkData.destUrl;
+          } else {
+            const url = new URL(location.href);
+            url.searchParams.set('istep', '1');
+            url.searchParams.set('tos_msg', '1');
+            location.href = url.toString();
+          }
+        };
+      }
+    }, 1000);
+  };
+}
+</script>
+
+<footer class="site-footer" style="text-align:center;padding:18px 12px 28px;opacity:.75;font-size:13px;">© 2026 ADMENSION · <a href="privacy-policy.html">Privacy Policy</a></footer>
+
+</body>
+</html>
